@@ -1,23 +1,32 @@
-# AI Town 🏠💻💌
+<div align="center">
 
-[Live Demo](https://www.convex.dev/ai-town)
+# ai-uni
 
-[Join our community Discord: AI Stack Devs](https://discord.gg/PQUmTBTGmT)
+**AI Town–based multi-agent simulation workspace**
 
-<img width="1454" alt="Screen Shot 2023-08-14 at 10 01 00 AM" src="https://github.com/a16z-infra/ai-town/assets/3489963/a4c91f17-23ed-47ec-8c4e-9f9a8505057d">
+<p>
+  <img alt="Base" src="https://img.shields.io/badge/base-AI%20Town-6C63FF">
+  <img alt="Frontend" src="https://img.shields.io/badge/frontend-React%20%2B%20PixiJS-2F80ED">
+  <img alt="Backend" src="https://img.shields.io/badge/backend-Convex-F2994A">
+  <img alt="Language" src="https://img.shields.io/badge/language-TypeScript-3178C6">
+</p>
 
-AI Town is a virtual town where AI characters live, chat and socialize.
+[**Architecture**](ARCHITECTURE.md) · [**Upstream AI Town**](https://github.com/a16z-infra/ai-town)
 
-This project is a deployable starter kit for easily building and customizing your own version of AI
-town. Inspired by the research paper
-[_Generative Agents: Interactive Simulacra of Human Behavior_](https://arxiv.org/pdf/2304.03442.pdf).
+</div>
 
-The primary goal of this project, beyond just being a lot of fun to work on, is to provide a
-platform with a strong foundation that is meant to be extended. The back-end natively supports
-shared global state, transactions, and a simulation engine and should be suitable from everything
-from a simple project to play around with to a scalable, multi-player game. A secondary goal is to
-make a JS/TS framework available as most simulators in this space (including the original paper
-above) are written in Python.
+## Repository status
+
+`ai-uni` is a customization workspace built on the open-source **AI Town** codebase. The current repository still retains the upstream simulation architecture and package identity, including Convex game state, React/Pixi rendering, and LLM-driven agents.
+
+This README intentionally distinguishes the local repository from the upstream project instead of presenting upstream AI Town branding as if it were an original standalone implementation.
+
+> [!NOTE]
+> Before describing university-specific agents, curricula, campus mechanics, or research claims here, those features should exist in the repository and be documented against the implementation.
+
+## Upstream foundation
+
+AI Town provides the underlying multi-agent world: characters move through a shared environment, hold conversations, maintain agent state, and interact through a persistent simulation engine. See the upstream repository for original project documentation, community links, and canonical examples.
 
 ## Overview
 
