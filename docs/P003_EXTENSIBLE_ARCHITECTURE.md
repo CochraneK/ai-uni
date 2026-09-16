@@ -1,3 +1,21 @@
+## Canonical ontology source
+
+P003 does **not** own the shared Human Ontology.
+
+The canonical source now lives in the AI-persona repository:
+
+- `ontology/human_ontology.v1.json`
+- `ontology/HUMAN_ONTOLOGY_REVIEW.md`
+- `ontology/ONTOLOGY_CHANGE_TEMPLATE.md`
+
+P003's TypeScript ontology definitions are a local runtime mirror of selected canonical ids. Shared changes must originate in Human Ontology review first, then be synchronized into P003.
+
+System-wide rule:
+
+> **Orthogonal axes across the system; MECE within each axis.**
+
+This prevents AI-persona and P003 from evolving two competing definitions of life stage, life domain, personality layer, birthplace/culture or event pressure.
+
 # P003 Extensible Lifespan Architecture
 
 > Core rule: P003 is not a finite branching script. It is a continuously extensible life-simulation engine whose content can grow without rewriting the core.
