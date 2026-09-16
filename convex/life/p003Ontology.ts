@@ -1,3 +1,11 @@
+export const p003CanonicalHumanOntologyRef = {
+  ontologyId: 'human-ontology',
+  version: '1.0.0',
+  canonicalRepository: 'CochraneK/AI-persona',
+  canonicalPath: 'ontology/human_ontology.v1.json',
+  note: 'P003 keeps a local runtime mirror of selected canonical ids for TypeScript ergonomics. AI-persona Human Ontology is the source of truth; changes originate there and require ontology review.',
+} as const;
+
 import type { LifeEventCategory, LifeSeasonId } from './types';
 
 export type P003LifeDomainId =
@@ -165,4 +173,4 @@ export const legacyCategoryPrimaryDomain: Record<LifeEventCategory, P003LifeDoma
 };
 
 export const p003OntologyBoundary =
-  'Every storylet has exactly one primary life domain, one primary narrative function and one MECE age band. Cross-domain effects are tags, not competing primary classifications.';
+  'P003 consumes Human Ontology v1 as the canonical shared ontology. Local life-domain and developmental-stage ids are a runtime mirror, not a second source of truth. Every storylet has exactly one primary life domain, one primary narrative function and one MECE age band. Cross-domain effects are tags, not competing primary classifications.';
