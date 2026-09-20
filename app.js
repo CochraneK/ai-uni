@@ -37,6 +37,7 @@ $("#enterParticipant").onclick=()=>{
   state.user.updatedAt=now(); persist();
   localStorage.setItem(STORE.active,code);
   $("#activeUserLabel").textContent="当前参与码："+code;
+  hydrateUserUI();
 };
 const initial=activeUser(); if(initial){state.user=initial;$("#participantCode").value=initial.code;$("#activeUserLabel").textContent="当前参与码："+initial.code}
 
@@ -108,9 +109,20 @@ function fallbackCharacter(input){
   const names=["岚","Nova","林澈","阿澈"];const name=names[Math.floor(Math.random()*names.length)];
   return {name,headline:input.idea||"原创角色",traits:(input.tone||"温柔,好奇,有自己的观点").split(/[,，、]/).filter(Boolean),identity:"由你的灵感创造的原创角色",relationship:input.relation||"自定义关系",background:"TA 的背景会随着你们的交流逐渐变得具体。",speaking_style:input.tone||"自然聊天",opening:"你好。我好像刚刚从你的一个念头里醒过来。",image_prompt:"original character portrait, "+(input.idea||"friendly original AI character")};
 }
-function currentCharacter(){return state.user?.characters?.at(-1)||null}
+function currentCharacter(){
+  if(!state.user)return null;
+  return state.user.characters?.find(c=>c.id===state.user.selectedCharacterId)||state.user.characters?.at(-1)||null;
+}
+function renderCharacterLibrary(){
+  const el=$("#characterLibrary");if(!el)return;
+  const chars=state.user?.characters||[];
+  if(!chars.length){el.innerHTML='<p class="muted">你创建的角色会保存在这里。</p>';return}
+  el.innerHTML=chars.map(c=>'<button class="character-mini '+(c.id===currentCharacter()?.id?'selected':'')+'" data-character-id="'+esc(c.id)+'"><strong>'+esc(c.name||"未命名")+'</strong><span>'+esc(c.headline||c.relationship||"原创角色")+'</span></button>').join("");
+  el.querySelectorAll("[data-character-id]").forEach(b=>b.onclick=()=>{state.user.selectedCharacterId=b.dataset.characterId;persist();renderCharacter()});
+}
 function renderCharacter(){
-  const c=currentCharacter();if(!c)return;
+  renderCharacterLibrary();
+  const c=currentCharacter();if(!c){$("#characterCard").innerHTML='<p class="muted">先创造一个角色。</p>';$("#characterChat").innerHTML="";return;}
   $("#characterCard").innerHTML='<h2>'+esc(c.name)+'</h2><p>'+esc(c.headline||c.identity||"")+'</p>'+tags(c.traits)+'<p><b>关系：</b>'+esc(c.relationship||"")+'</p><p>'+esc(c.background||"")+'</p>';
   if(c.avatar)showAvatar("#characterAvatar",c.avatar);
   renderChat("#characterChat",c.chat||[]);
@@ -125,7 +137,7 @@ $("#generateCharacter").onclick=async()=>{
     c=safeJSON(out)||fallbackCharacter(input);
   }catch{c=fallbackCharacter(input)}
   c.id=crypto.randomUUID?.()||String(Date.now());c.input=input;c.createdAt=now();c.chat=[{role:"assistant",content:c.opening||"你好。",at:now()}];
-  state.user.characters.push(c);persist();renderCharacter();
+  state.user.characters.push(c);state.user.selectedCharacterId=c.id;persist();renderCharacter();
 };
 $("#sendCharacter").onclick=async()=>{
   if(!ensureUser())return;const c=currentCharacter();if(!c)return;
@@ -174,4 +186,12 @@ function renderAdmin(){
 $("#refreshAdmin").onclick=renderAdmin;
 $("#exportAll").onclick=()=>{const data=JSON.stringify({exportedAt:now(),users:allUsers()},null,2);const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([data],{type:"application/json"}));a.download="ai-uni-export.json";a.click();URL.revokeObjectURL(a.href)};
 
-renderFuture();renderCharacter();renderReport();
+function hydrateUserUI(){
+  const p=state.user?.future?.profile||{};
+  if($("#futureNow"))$("#futureNow").value=p.now||"";
+  if($("#futureEvents"))$("#futureEvents").value=p.events||"";
+  if($("#futureGoals"))$("#futureGoals").value=p.goals||"";
+  if($("#futureYears")&&p.years)$("#futureYears").value=String(p.years);
+  renderFuture();renderCharacter();renderReport();
+}
+hydrateUserUI();
