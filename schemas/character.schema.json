@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI-Uni Character",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "traits",
+    "relationship",
+    "chat"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "string"
+    },
+    "traits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "identity": {
+      "type": "string"
+    },
+    "relationship": {
+      "type": "string"
+    },
+    "background": {
+      "type": "string"
+    },
+    "speaking_style": {
+      "type": "string"
+    },
+    "opening": {
+      "type": "string"
+    },
+    "image_prompt": {
+      "type": "string"
+    },
+    "persona_core": {
+      "type": "object"
+    },
+    "avatar": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "chat": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "role": {
+            "enum": [
+              "user",
+              "assistant",
+              "system"
+            ]
+          },
+          "content": {
+            "type": "string"
+          },
+          "at": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
