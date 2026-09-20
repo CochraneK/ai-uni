@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI-Uni · 004 / 005</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <button class="brand" data-nav="home">AI-Uni</button>
+      <nav>
+        <button data-nav="future">004 Future Me</button>
+        <button data-nav="character">005 Character Studio</button>
+        <button data-nav="report">报告</button>
+        <button data-nav="admin">管理</button>
+        <button data-nav="settings">设置</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="view-home" class="view active">
+        <div class="hero">
+          <p class="eyebrow">AI-Ques · 004 / 005</p>
+          <h1>创造一个未来的你，<br/>或创造一个想认识的人。</h1>
+          <p class="lede">两条体验，共用同一个用户档案、对话记忆与分析报告。</p>
+          <div class="actions">
+            <button class="primary" data-nav="future">和未来的自己聊聊</button>
+            <button class="secondary" data-nav="character">创造一个角色</button>
+          </div>
+        </div>
+        <div class="identity-card card">
+          <h2>先确认你是谁</h2>
+          <p class="muted">参与码只用于本机区分用户。输入已有参与码可继续上次。</p>
+          <div class="row">
+            <input id="participantCode" placeholder="参与码，例如 A102" />
+            <button id="enterParticipant" class="primary">进入</button>
+          </div>
+          <p id="activeUserLabel" class="status"></p>
+        </div>
+      </section>
+
+      <section id="view-future" class="view">
+        <div class="section-head">
+          <div><p class="eyebrow">004 · Future Me</p><h1>给未来的自己一些材料</h1></div>
+          <button class="ghost" data-nav="home">返回</button>
+        </div>
+        <div class="grid two">
+          <div class="card stack">
+            <label>现在的我<textarea id="futureNow" placeholder="我现在在做什么、在意什么、困惑什么……"></textarea></label>
+            <label>重要经历<textarea id="futureEvents" placeholder="对你影响较大的经历、转折、关系……"></textarea></label>
+            <label>价值与目标<textarea id="futureGoals" placeholder="你希望保留什么？想成为什么样的人？"></textarea></label>
+            <label>几年后的你
+              <select id="futureYears"><option>1</option><option>3</option><option selected>4</option><option>10</option><option>20</option></select>
+            </label>
+            <button id="generateFuture" class="primary">生成一个可能的未来版本</button>
+          </div>
+          <div class="card result-card">
+            <div id="futureAvatar" class="avatar placeholder">Future Me</div>
+            <div id="futureCard"><p class="muted">未来人格会出现在这里。它是“可能的未来”，不是预测。</p></div>
+            <div class="row wrap">
+              <button id="generateFutureImage" class="secondary">生成未来形象</button>
+              <button id="speakFuture" class="secondary">朗读</button>
+            </div>
+          </div>
+        </div>
+        <div class="card chat-card">
+          <h2>和未来的自己聊聊</h2>
+          <div id="futureChat" class="chat"></div>
+          <div class="row">
+            <input id="futureMessage" placeholder="现在的你想问未来的自己什么？" />
+            <button id="sendFuture" class="primary">发送</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-character" class="view">
+        <div class="section-head">
+          <div><p class="eyebrow">005 · Character Studio</p><h1>你想创造谁？</h1></div>
+          <button class="ghost" data-nav="home">返回</button>
+        </div>
+        <div class="grid two">
+          <div class="card stack">
+            <label>一句话灵感<textarea id="characterIdea" placeholder="例如：一个外冷内热、会陪我学习的机器人学长"></textarea></label>
+            <label>和你的关系<input id="characterRelation" placeholder="朋友 / 搭档 / 导师 / 自定义" /></label>
+            <label>你希望 TA 给人的感觉<input id="characterTone" placeholder="温柔、神秘、直接、幽默……" /></label>
+            <label>可选的小秘密<textarea id="characterSecret" placeholder="只有真正了解 TA 的人才知道……"></textarea></label>
+            <button id="generateCharacter" class="primary">让 TA 成形</button>
+          </div>
+          <div class="card result-card">
+            <div id="characterAvatar" class="avatar placeholder">New Character</div>
+            <div id="characterCard"><p class="muted">不是从角色库里选择。你的想法会变成一个新的角色。</p></div>
+            <div class="row wrap">
+              <button id="generateCharacterImage" class="secondary">生成角色图片</button>
+              <button id="speakCharacter" class="secondary">朗读</button>
+            </div>
+          </div>
+        </div>
+        <div class="card chat-card">
+          <h2>开始交流</h2>
+          <div id="characterChat" class="chat"></div>
+          <div class="row">
+            <input id="characterMessage" placeholder="对 TA 说点什么…" />
+            <button id="sendCharacter" class="primary">发送</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-report" class="view">
+        <div class="section-head">
+          <div><p class="eyebrow">Analysis</p><h1>你的综合报告</h1></div>
+          <button id="generateReport" class="primary">重新生成</button>
+        </div>
+        <div class="notice">报告基于自述与对话做模式总结。创伤相关、精神病性体验等部分仅呈现文本信号与不确定性，不构成诊断。</div>
+        <div id="reportContent" class="card prose"><p class="muted">生成报告后显示在这里。</p></div>
+      </section>
+
+      <section id="view-admin" class="view">
+        <div class="section-head"><div><p class="eyebrow">Admin</p><h1>本地管理台</h1></div></div>
+        <div class="notice">当前为浏览器本地原型，不是安全的生产级管理员权限。正式研究部署需服务端鉴权。</div>
+        <div class="card">
+          <div class="row wrap">
+            <button id="refreshAdmin" class="secondary">刷新用户</button>
+            <button id="exportAll" class="secondary">导出全部 JSON</button>
+          </div>
+          <div id="adminUsers" class="table"></div>
+        </div>
+      </section>
+
+      <section id="view-settings" class="view">
+        <div class="section-head"><div><p class="eyebrow">Settings</p><h1>模型设置</h1></div></div>
+        <div class="card stack narrow">
+          <label>OpenAI-compatible API Base<input id="apiBase" placeholder="http://localhost:8000/v1" /></label>
+          <label>API Key<input id="apiKey" type="password" placeholder="可留空" /></label>
+          <label>文本模型<input id="textModel" placeholder="你的 FreeLLM 文本模型名" /></label>
+          <label>图像模型<input id="imageModel" placeholder="你的 FreeLLM 图像模型名" /></label>
+          <button id="saveSettings" class="primary">保存设置</button>
+          <p class="muted">浏览器直接访问本地 API 时，服务端需要允许 CORS。后续会加入可选本地代理。</p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
