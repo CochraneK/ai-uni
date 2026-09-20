@@ -2,7 +2,27 @@
 
 > Two focused AI experiences for AI-Ques: **004 Future Me** and **005 Character Studio**.
 
+[Architecture](docs/ARCHITECTURE.md) · [Agent handoff](HANDOFF.md) · [Status](STATUS.md) · [Decisions](DECISIONS.md) · [TODO](TODO.md)
+
 AI-Uni is a lightweight, browser-first prototype for creating and talking with a possible future self, or creating an original AI character and chatting with it. It keeps user data locally by default and can connect to an OpenAI-compatible text/image endpoint such as a local FreeLLM API.
+
+## Architecture at a glance
+
+```mermaid
+flowchart LR
+  U[Participant] --> F[004 Future Me]
+  U --> C[005 Character Studio]
+  F --> S[Shared participant / memory layer]
+  C --> S
+  S --> R[Reflection report]
+  S --> A[Local admin prototype]
+  F --> P[OpenAI-compatible provider]
+  C --> P
+  P -. direct browser or local proxy .-> F
+  P -. direct browser or local proxy .-> C
+```
+
+The browser MVP is intentionally local-first. Production research use requires authenticated server-side identity, storage, consent, access control and auditability.
 
 ## Modules
 
@@ -101,6 +121,33 @@ STATUS.md                         canonical current state
 DECISIONS.md                      frozen product decisions
 TODO.md                           execution queue
 ```
+
+## Validation
+
+Current CI is intentionally narrow:
+
+```bash
+node --check app.js
+python -m py_compile proxy/server.py
+```
+
+For product behavior changes, also run the local server and exercise the affected 004/005 path manually until browser/runtime regression tests are added.
+
+## Agent continuity
+
+Cold-start order:
+
+```text
+AGENTS.md
+→ HANDOFF.md
+→ STATUS.md
+→ DECISIONS.md
+→ TODO.md
+→ docs/ARCHITECTURE.md
+→ affected module files
+```
+
+Git is the durable source of truth; chat history is not canonical.
 
 ## Project state
 
