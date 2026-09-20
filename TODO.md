@@ -1,8 +1,8 @@
 # TODO
 
 ## P0 — v0.2
-- [ ] add optional local proxy to avoid browser CORS failures with FreeLLM
-- [ ] move secrets out of browser storage when proxy is enabled
+- [x] add optional local proxy to avoid browser CORS failures with FreeLLM
+- [x] allow browser API key to remain blank when proxy mode owns the upstream secret
 - [ ] add secure user/admin authentication mode
 - [ ] add user profile editor and resume-last-session flow
 - [ ] add explicit character library instead of only latest-character chat
@@ -37,4 +37,4 @@
 - [ ] organization / study separation
 - [ ] research consent records
 - [ ] admin aggregate analytics
-- [ ] tests + CI
+- [ ] expand syntax CI into browser/runtime/data/privacy regression tests
