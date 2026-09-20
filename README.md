@@ -7,6 +7,9 @@ AI-Uni is a lightweight, browser-first prototype for creating and talking with a
 ## Modules
 
 ### 004 · Future Me
+
+[Module notes](apps/004-future-me/README.md)
+
 - collect the user's current self, goals, values and important experiences
 - generate a **possible future self** (not a prediction)
 - optionally generate a future-self image
@@ -15,6 +18,9 @@ AI-Uni is a lightweight, browser-first prototype for creating and talking with a
 - preserve conversations for later analysis
 
 ### 005 · Character Studio
+
+[Module notes](apps/005-character-studio/README.md)
+
 - user starts from their own idea instead of choosing a preset character
 - AI expands the idea into a structured character/persona
 - optionally generate an original character image
@@ -22,18 +28,57 @@ AI-Uni is a lightweight, browser-first prototype for creating and talking with a
 - preserve character and conversation history
 
 ### Shared analysis
+
 AI-Uni can synthesize saved user input and conversations into a structured reflection report covering personality patterns, strengths, limitations, self-model, relationship patterns, growth suggestions, and carefully worded **non-diagnostic** trauma-related / unusual-experience signals.
+
+A core rule is that fictional character content must not be treated as autobiographical or psychiatric evidence about the participant.
 
 ## Run
 
 This first version is deliberately build-free:
 
-1. clone/download the repository
-2. serve the folder with any local HTTP server, e.g. `python -m http.server 8080`
-3. open `http://localhost:8080`
-4. open **Settings** and configure your OpenAI-compatible endpoint/model if you want AI generation
+```bash
+python -m http.server 8080
+```
 
-Without an API, the interface and local data flow still work, but AI-generation actions use local fallback content.
+Then open `http://localhost:8080`.
+
+Without an API, the interface and local data flow still work; AI-generation actions use local fallback content.
+
+## Connect FreeLLM / another OpenAI-compatible endpoint
+
+### Direct browser mode
+
+Open **Settings** and enter:
+
+- API Base, e.g. `http://127.0.0.1:8000/v1`
+- text model name
+- image model name
+- API key if needed
+
+The upstream service must permit browser CORS.
+
+### Local proxy mode
+
+If direct browser requests fail because of CORS, or you do not want an upstream key stored in browser localStorage:
+
+```bash
+pip install -r proxy/requirements.txt
+
+# macOS/Linux example
+export UPSTREAM_API_BASE=http://127.0.0.1:8000/v1
+export UPSTREAM_API_KEY=
+
+uvicorn proxy.server:app --host 127.0.0.1 --port 8787
+```
+
+Then set the web app API Base to:
+
+```
+http://127.0.0.1:8787/v1
+```
+
+and leave the browser API key blank.
 
 ## Data & privacy
 
@@ -43,10 +88,24 @@ Without an API, the interface and local data flow still work, but AI-generation 
 - Do not deploy sensitive research/clinical data publicly without replacing localStorage/admin controls with authenticated server-side storage and access control.
 - Psychological outputs are signals for reflection/research support, not diagnosis.
 
+## Repository map
+
+```
+index.html / styles.css / app.js   browser MVP
+apps/004-future-me/               004 product boundary
+apps/005-character-studio/        005 product boundary
+proxy/                            optional local model proxy
+schemas/                          shared data contracts
+docs/                             architecture
+STATUS.md                         canonical current state
+DECISIONS.md                      frozen product decisions
+TODO.md                           execution queue
+```
+
 ## Project state
 
 See [STATUS.md](STATUS.md), [DECISIONS.md](DECISIONS.md), and [TODO.md](TODO.md).
 
 ## Scope
 
-AI-Uni intentionally does **not** contain the old life-simulation / AI-Town game loop. Those concerns belong elsewhere. This repository focuses on 004 and 005 plus the shared user, memory, analysis and admin shell.
+AI-Uni intentionally does **not** contain the old life-simulation / AI-Town game loop. This repository focuses on 004 and 005 plus their shared user, memory, analysis and admin shell.
