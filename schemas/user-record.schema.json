@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI-Uni User Record",
+  "type": "object",
+  "required": [
+    "code",
+    "createdAt",
+    "future",
+    "characters"
+  ],
+  "properties": {
+    "code": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string"
+    },
+    "future": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "type": "object"
+        },
+        "persona": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "avatar": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "chat": {
+          "type": "array"
+        }
+      }
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "report": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  }
+}
