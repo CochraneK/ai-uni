@@ -32,3 +32,16 @@ Personality / strengths / limitations / self / relationships / growth can be sum
 ## D007 — Prototype vs production
 
 The browser MVP uses localStorage for speed of iteration. Production research use requires authenticated server-side storage, access control, consent handling, auditability and export governance.
+
+
+## D008 — Agent continuity
+
+Git is the durable canonical project state. `AGENTS.md` and `HANDOFF.md` provide a cold-start path for another agent, while STATUS/DECISIONS/TODO remain the current state, frozen choices, and execution queue.
+
+## D009 — CI claim boundary
+
+The current GitHub workflow provides syntax checks for `app.js` and `proxy/server.py`. It must not be described as full product/runtime coverage until browser, storage, privacy, and interaction regression tests are added.
+
+## D010 — Canonical identity
+
+Repository-facing maintainer identity is **CochraneK**.

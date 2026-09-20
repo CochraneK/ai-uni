@@ -25,6 +25,8 @@ The repository was recreated from scratch on 2026-09-21. The old AI Town / life-
 - shared report generation
 - local admin overview and JSON export
 - OpenAI-compatible text/image settings
+- optional local proxy for browser CORS/key-isolation use cases
+- basic syntax CI for browser JavaScript and proxy Python
 
 ## Important limitation
 
@@ -32,4 +34,4 @@ The current version is a **local/browser research prototype**. localStorage and 
 
 ## Next milestone
 
-v0.2: local proxy/backend, secure user/admin separation, structured memory extraction, richer text mining, and deployment checks.
+v0.2: secure server-backed user/admin separation, resume/profile flows, structured evidence-linked memory extraction, richer text mining, browser/runtime regression tests, and deployment/privacy checks.
